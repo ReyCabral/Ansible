@@ -1,0 +1,11 @@
+
+ansible-vault edit secret.yml
+
+ansible-playbook --syntax-check --ask-vault-pass create_users.yml
+
+echo 'redhat' > vault-pass
+chmod 0600 vault-pass
+
+ansible-playbook --vault-password-file=vault-pass create_users.yml
+
+ssh -o PreferredAuthentications=password ansibleuser1@servera.lab.example.com

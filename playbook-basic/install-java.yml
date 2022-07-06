@@ -1,0 +1,30 @@
+---
+- hosts: node1
+  remote_user: devops
+  become: true
+  tasks:
+    - name: Copying Java JRE to remote server
+      copy:
+        src: ~/installer/jre-8u333-linux-x64.rpm
+        dest: /tmp
+
+    - name: Install Java JRE rpm from a local file
+      yum:
+        name: /tmp/jre-8u333-linux-x64.rpm
+        state: present
+        disable_gpg_check: yes
+
+    - name: Copying Java JDK to remote server
+      copy:
+        src: ~/installer/jdk-8u333-linux-x64.rpm
+        dest: /tmp
+
+    - name: Install Java JDK rpm from a local file
+      yum:
+        name: /tmp/jdk-8u333-linux-x64.rpm
+        state: present
+        disable_gpg_check: yes
+
+
+
+        

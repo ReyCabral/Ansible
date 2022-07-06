@@ -1,0 +1,12 @@
+---
+- name: /etc/hosts is up to date
+  hosts: 172.31.80.254 node2
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+    - name: 172.31.80.254 node2 in /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        line: '172.31.80.254 node2'
+        state: present

@@ -1,0 +1,34 @@
+#In the working directory, create the playbook.yml playbook and add the webserver host group as the managed host. Define the following play variables:
+
+ariable	Values
+firewall_pkg	firewalld
+firewall_svc	firewalld
+web_pkg	httpd
+web_svc	httpd
+ssl_pkg	mod_ssl
+httpdconf_src	files/httpd.conf
+httpdconf_dest	/etc/httpd/conf/httpd.conf
+htaccess_src	files/.htaccess
+secrets_dir	/etc/httpd/secrets
+secrets_src	files/htpasswd
+secrets_dest	"{{ secrets_dir }}/htpasswd"
+web_root	/var/www/html
+
+
+#Create the playbook.yml playbook file 
+
+
+#Create the encrypted variable file, vars/secret.yml, using Ansible Vault. Set the password for the encrypted file to redhat.
+
+ansible-vault create vars/secret.yml
+
+
+#Run the playbook.yml playbook. Verify that content is successfully returned from the web server, and that it matches what was configured in an earlier task.
+
+ansible-playbook --syntax-check --ask-vault-pass playbook.yml
+
+#Using the ansible-playbook command, run the playbook with the --ask-vault-pass option. Enter redhat when prompted for the password.
+
+ansible-playbook playbook.yml --ask-vault-pass
+
+

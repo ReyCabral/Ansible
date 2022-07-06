@@ -1,0 +1,31 @@
+
+
+#Run an ad hoc command with the setup module. Search for the ansible_local section in the output. There should not be any custom facts at this point.
+
+ansible webserver -m setup
+
+#Before running the playbook, verify its syntax is correct by running ansible-playbook --syntax-check. If it reports any errors, correct them before moving to the next step. You should see output similar to the following:
+
+ansible-playbook --syntax-check setup_facts.yml
+
+#Run the setup_facts.yml playbook.
+
+ansible-playbook setup_facts.yml
+
+#Before running the playbook, use an ad hoc command to verify the httpd service is not currently running on servera.
+
+ansible node1 -m command -a 'systemctl status httpd'
+
+#Verify the syntax of the playbook by running ansible-playbook --syntax-check. If it reports any errors, correct them before moving to the next step. You should see output similar to the following:
+
+ansible-playbook --syntax-check playbook.yml
+
+
+#Run the playbook using the ansible-playbook command. Watch the output as Ansible installs the package and then enables the service.
+
+ansible-playbook playbook.yml
+
+#Use an ad hoc command to execute systemctl to determine whether the httpd service is now running on servera.
+
+ansible node1 -m command -a 'systemctl status httpd'
+

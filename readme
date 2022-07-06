@@ -1,0 +1,116 @@
+
+https://www.youtube.com/watch?v=TLB5MY9BBa4
+https://www.youtube.com/watch?v=zTQ1kY8xsY8
+https://www.youtube.com/watch?v=cFWukSTIWDQ
+https://www.youtube.com/watch?v=R8_veQiYBjI
+https://www.youtube.com/watch?v=Af3aU5QyC9U
+
+
+https://www.youtube.com/watch?v=TjBk6FFnymo
+https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/auth?client_id=rh-product-eval&redirect_uri=https%3A%2F%2Fwww.redhat.com%2Fwapps%2Feval%2Findex.html%3Fevaluation_id%3D1039&state=550e4bde-4f9e-4c2f-ab50-3c5e1620f473&response_mode=fragment&response_type=code&scope=openid&nonce=75bc2f3c-82cd-4b5d-85eb-6f7fbe356de7
+
+
+https://www.techbeatly.com/use-terraform-to-create-a-free-ansible-lab-in-aws/
+
+
+
+#install python first
+
+[root@controlnode ~]# yum list installed platform-python
+[root@host ~]# yum module install python36
+
+#For Red Hat Enterprise Linux 7 and earlier, install the python package, which provides Python 2. Instead of python3-libselinux, install libselinux-python instead.
+
+
+#Install Red Hat Ansible Engine.
+
+[root@host ~]# yum install ansible
+
+#Verify that Ansible is installed on the system
+[student@workstation ~]$ ansible --version
+
+#Invoke the setup module on the local host to retrieve the value of the ansible_python_version fact.
+[student@workstation ~]$ ansible -m setup localhost | grep ansible_python_version
+
+
+
+#Use the ansible all --list-hosts command to list all managed hosts in the default inventory file.
+[student@workstation ~]$ ansible all --list-hosts
+
+#Use the ansible ungrouped --list-hosts command to list only managed hosts that do not belong to a group.
+[student@workstation ~]$ ansible ungrouped --list-hosts
+
+#Use the ansible webservers --list-hosts command to list only managed hosts that belong to the webservers group.
+[student@workstation ~]$ ansible webservers --list-hosts
+
+
+[student@workstation deploy-inventory]$ ansible all -i inventory --list-hosts
+[student@workstation deploy-inventory]$ ansible ungrouped -i inventory --list-hosts
+
+
+#For example, the following is a typical ansible.cfg file:
+
+[defaults]
+inventory = ./inventory
+remote_user = user
+ask_pass = false
+
+[privilege_escalation]
+become = true
+become_method = sudo
+become_user = root
+become_ask_pass = false
+
+
+## password-less sudo for Ansible user
+someuser ALL=(ALL) NOPASSWD:ALL
+
+
+#Running Arbitrary Commands on Managed Hosts
+[user@controlnode ~]$ ansible all -m command -a /usr/bin/hostname
+[user@controlnode ~]$ ansible localhost -m shell -a set
+
+
+#create a file with content if exist recreated the file
+ansible localhost -m copy -a 'content="Managed by Ansible\n" dest=/etc/motd' -u devops --become
+
+
+#cat command
+ ansible all -m command -a 'cat /etc/motd' -u devops
+
+$HOME/.vimrc
+ autocmd FileType yaml setlocal ai ts=2 sw=2 et
+
+#Syntax Verification
+[student@workstation ~]$ ansible-playbook --syntax-check webserver.yml
+
+#Executing a Dry Run
+[student@workstation ~]$ ansible-playbook -C webserver.yml
+
+
+sed 's/word1/word2/g' input.file
+
+
+The status field records the development status of the module:
+
+stableinterface: The module's keywords are stable, and every effort will be made not to remove keywords or change their meaning.
+preview: The module is in technology preview, and might be unstable, its keywords might change, or it might require libraries or web services that are themselves subject to incompatible changes.
+deprecated: The module is deprecated, and will no longer be available in some future release.
+removed: The module has been removed from the release, but a stub exists for documentation purposes to help former users migrate to new modules.
+
+
+
+#Capturing Command Output with Registered Variables
+
+---
+- name: Installs a package and prints the result
+  hosts: all
+  tasks:
+    - name: Install the package
+      yum:
+        name: httpd
+        state: installed
+      register: install_result
+
+    - debug:
+        var: install_result
