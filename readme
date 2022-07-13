@@ -1,18 +1,3 @@
-dd comment
-https://www.youtube.com/watch?v=TLB5MY9BBa4
-https://www.youtube.com/watch?v=zTQ1kY8xsY8
-https://www.youtube.com/watch?v=cFWukSTIWDQ
-https://www.youtube.com/watch?v=R8_veQiYBjI
-https://www.youtube.com/watch?v=Af3aU5QyC9U
-
-
-https://www.youtube.com/watch?v=TjBk6FFnymo
-https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/auth?client_id=rh-product-eval&redirect_uri=https%3A%2F%2Fwww.redhat.com%2Fwapps%2Feval%2Findex.html%3Fevaluation_id%3D1039&state=550e4bde-4f9e-4c2f-ab50-3c5e1620f473&response_mode=fragment&response_type=code&scope=openid&nonce=75bc2f3c-82cd-4b5d-85eb-6f7fbe356de7
-
-
-https://www.techbeatly.com/use-terraform-to-create-a-free-ansible-lab-in-aws/
-
-
 
 #install python first
 
@@ -89,7 +74,6 @@ $HOME/.vimrc
 
 
 sed 's/word1/word2/g' input.file
-
 
 
 The status field records the development status of the module:
